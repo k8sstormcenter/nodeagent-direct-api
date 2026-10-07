@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package nodeagent.direct.v1;
+
+option go_package = "github.com/k8sstormcenter/nodeagent-direct-api/nodeagent/direct/v1;directv1";
+
+service AlertStream {
+  rpc Subscribe(SubscribeRequest) returns (stream AlertBatch);
+}
+
+message SubscribeRequest {
+  uint64 since_seq = 1;
+  uint32 max_batch = 2;
+  string producer_epoch = 3;
+}
+
+message AlertBatch {
+  uint64 oldest_seq = 1;
+  uint64 newest_seq = 2;
+  bool gap = 3;
+  uint64 dropped_since_last = 4;
+  int64 sent_at_ns = 5;
+  string node_agent_version = 6;
+  repeated Alert alerts = 7;
+  string producer_epoch = 8;
+}
+
+message Alert {
+  uint64 seq = 1;
+  string hostname = 2;
+  int64 event_time_ns = 3;
+  string rule_id = 4;
+  string message = 5;
+  bytes base_runtime_metadata = 6;
+  bytes runtime_k8s_details = 7;
+  bytes runtime_process_details = 8;
+  bytes cloud_metadata = 9;
+  string mitre_tactic = 10;
+  string mitre_technique = 11;
+  reserved 12;
+  reserved "rule_version";
+}
