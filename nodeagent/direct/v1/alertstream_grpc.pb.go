@@ -19,7 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AlertStream_Subscribe_FullMethodName = "/nodeagent.direct.v1.AlertStream/Subscribe"
+	AlertStream_Subscribe_FullMethodName         = "/nodeagent.direct.v1.AlertStream/Subscribe"
+	AlertStream_SubscribeProfiles_FullMethodName = "/nodeagent.direct.v1.AlertStream/SubscribeProfiles"
+	AlertStream_AckSnapshots_FullMethodName      = "/nodeagent.direct.v1.AlertStream/AckSnapshots"
 )
 
 // AlertStreamClient is the client API for AlertStream service.
@@ -27,6 +29,8 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AlertStreamClient interface {
 	Subscribe(ctx context.Context, in *SubscribeRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[AlertBatch], error)
+	SubscribeProfiles(ctx context.Context, in *SubscribeRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ProfileSnapshotBatch], error)
+	AckSnapshots(ctx context.Context, in *AckRequest, opts ...grpc.CallOption) (*AckResponse, error)
 }
 
 type alertStreamClient struct {
@@ -56,11 +60,42 @@ func (c *alertStreamClient) Subscribe(ctx context.Context, in *SubscribeRequest,
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type AlertStream_SubscribeClient = grpc.ServerStreamingClient[AlertBatch]
 
+func (c *alertStreamClient) SubscribeProfiles(ctx context.Context, in *SubscribeRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ProfileSnapshotBatch], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &AlertStream_ServiceDesc.Streams[1], AlertStream_SubscribeProfiles_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[SubscribeRequest, ProfileSnapshotBatch]{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type AlertStream_SubscribeProfilesClient = grpc.ServerStreamingClient[ProfileSnapshotBatch]
+
+func (c *alertStreamClient) AckSnapshots(ctx context.Context, in *AckRequest, opts ...grpc.CallOption) (*AckResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AckResponse)
+	err := c.cc.Invoke(ctx, AlertStream_AckSnapshots_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AlertStreamServer is the server API for AlertStream service.
 // All implementations must embed UnimplementedAlertStreamServer
 // for forward compatibility.
 type AlertStreamServer interface {
 	Subscribe(*SubscribeRequest, grpc.ServerStreamingServer[AlertBatch]) error
+	SubscribeProfiles(*SubscribeRequest, grpc.ServerStreamingServer[ProfileSnapshotBatch]) error
+	AckSnapshots(context.Context, *AckRequest) (*AckResponse, error)
 	mustEmbedUnimplementedAlertStreamServer()
 }
 
@@ -73,6 +108,12 @@ type UnimplementedAlertStreamServer struct{}
 
 func (UnimplementedAlertStreamServer) Subscribe(*SubscribeRequest, grpc.ServerStreamingServer[AlertBatch]) error {
 	return status.Errorf(codes.Unimplemented, "method Subscribe not implemented")
+}
+func (UnimplementedAlertStreamServer) SubscribeProfiles(*SubscribeRequest, grpc.ServerStreamingServer[ProfileSnapshotBatch]) error {
+	return status.Errorf(codes.Unimplemented, "method SubscribeProfiles not implemented")
+}
+func (UnimplementedAlertStreamServer) AckSnapshots(context.Context, *AckRequest) (*AckResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AckSnapshots not implemented")
 }
 func (UnimplementedAlertStreamServer) mustEmbedUnimplementedAlertStreamServer() {}
 func (UnimplementedAlertStreamServer) testEmbeddedByValue()                     {}
@@ -106,17 +147,56 @@ func _AlertStream_Subscribe_Handler(srv interface{}, stream grpc.ServerStream) e
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type AlertStream_SubscribeServer = grpc.ServerStreamingServer[AlertBatch]
 
+func _AlertStream_SubscribeProfiles_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(SubscribeRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(AlertStreamServer).SubscribeProfiles(m, &grpc.GenericServerStream[SubscribeRequest, ProfileSnapshotBatch]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type AlertStream_SubscribeProfilesServer = grpc.ServerStreamingServer[ProfileSnapshotBatch]
+
+func _AlertStream_AckSnapshots_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AckRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AlertStreamServer).AckSnapshots(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AlertStream_AckSnapshots_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AlertStreamServer).AckSnapshots(ctx, req.(*AckRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AlertStream_ServiceDesc is the grpc.ServiceDesc for AlertStream service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var AlertStream_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "nodeagent.direct.v1.AlertStream",
 	HandlerType: (*AlertStreamServer)(nil),
-	Methods:     []grpc.MethodDesc{},
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AckSnapshots",
+			Handler:    _AlertStream_AckSnapshots_Handler,
+		},
+	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "Subscribe",
 			Handler:       _AlertStream_Subscribe_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "SubscribeProfiles",
+			Handler:       _AlertStream_SubscribeProfiles_Handler,
 			ServerStreams: true,
 		},
 	},

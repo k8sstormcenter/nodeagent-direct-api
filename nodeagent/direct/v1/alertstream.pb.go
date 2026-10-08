@@ -305,6 +305,398 @@ func (x *Alert) GetMitreTechnique() string {
 	return ""
 }
 
+type ProfileSnapshot struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Seq              uint64                 `protobuf:"varint,1,opt,name=seq,proto3" json:"seq,omitempty"`
+	Hostname         string                 `protobuf:"bytes,2,opt,name=hostname,proto3" json:"hostname,omitempty"`
+	ProducerEpoch    string                 `protobuf:"bytes,3,opt,name=producer_epoch,json=producerEpoch,proto3" json:"producer_epoch,omitempty"`
+	Namespace        string                 `protobuf:"bytes,4,opt,name=namespace,proto3" json:"namespace,omitempty"`
+	ProfileName      string                 `protobuf:"bytes,5,opt,name=profile_name,json=profileName,proto3" json:"profile_name,omitempty"`
+	ChunkName        string                 `protobuf:"bytes,6,opt,name=chunk_name,json=chunkName,proto3" json:"chunk_name,omitempty"`
+	SeriesId         string                 `protobuf:"bytes,7,opt,name=series_id,json=seriesId,proto3" json:"series_id,omitempty"`
+	ReportTimeNs     int64                  `protobuf:"varint,8,opt,name=report_time_ns,json=reportTimeNs,proto3" json:"report_time_ns,omitempty"`
+	PrevReportTimeNs int64                  `protobuf:"varint,9,opt,name=prev_report_time_ns,json=prevReportTimeNs,proto3" json:"prev_report_time_ns,omitempty"`
+	Status           string                 `protobuf:"bytes,10,opt,name=status,proto3" json:"status,omitempty"`
+	Completion       string                 `protobuf:"bytes,11,opt,name=completion,proto3" json:"completion,omitempty"`
+	ProfileKind      string                 `protobuf:"bytes,12,opt,name=profile_kind,json=profileKind,proto3" json:"profile_kind,omitempty"`
+	Spec             []byte                 `protobuf:"bytes,13,opt,name=spec,proto3" json:"spec,omitempty"`
+	SpecSha256       []byte                 `protobuf:"bytes,14,opt,name=spec_sha256,json=specSha256,proto3" json:"spec_sha256,omitempty"`
+	EntryCount       uint32                 `protobuf:"varint,15,opt,name=entry_count,json=entryCount,proto3" json:"entry_count,omitempty"`
+	Labels           map[string]string      `protobuf:"bytes,16,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	InstanceId       string                 `protobuf:"bytes,17,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
+	Wlid             string                 `protobuf:"bytes,18,opt,name=wlid,proto3" json:"wlid,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *ProfileSnapshot) Reset() {
+	*x = ProfileSnapshot{}
+	mi := &file_nodeagent_direct_v1_alertstream_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProfileSnapshot) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProfileSnapshot) ProtoMessage() {}
+
+func (x *ProfileSnapshot) ProtoReflect() protoreflect.Message {
+	mi := &file_nodeagent_direct_v1_alertstream_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProfileSnapshot.ProtoReflect.Descriptor instead.
+func (*ProfileSnapshot) Descriptor() ([]byte, []int) {
+	return file_nodeagent_direct_v1_alertstream_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *ProfileSnapshot) GetSeq() uint64 {
+	if x != nil {
+		return x.Seq
+	}
+	return 0
+}
+
+func (x *ProfileSnapshot) GetHostname() string {
+	if x != nil {
+		return x.Hostname
+	}
+	return ""
+}
+
+func (x *ProfileSnapshot) GetProducerEpoch() string {
+	if x != nil {
+		return x.ProducerEpoch
+	}
+	return ""
+}
+
+func (x *ProfileSnapshot) GetNamespace() string {
+	if x != nil {
+		return x.Namespace
+	}
+	return ""
+}
+
+func (x *ProfileSnapshot) GetProfileName() string {
+	if x != nil {
+		return x.ProfileName
+	}
+	return ""
+}
+
+func (x *ProfileSnapshot) GetChunkName() string {
+	if x != nil {
+		return x.ChunkName
+	}
+	return ""
+}
+
+func (x *ProfileSnapshot) GetSeriesId() string {
+	if x != nil {
+		return x.SeriesId
+	}
+	return ""
+}
+
+func (x *ProfileSnapshot) GetReportTimeNs() int64 {
+	if x != nil {
+		return x.ReportTimeNs
+	}
+	return 0
+}
+
+func (x *ProfileSnapshot) GetPrevReportTimeNs() int64 {
+	if x != nil {
+		return x.PrevReportTimeNs
+	}
+	return 0
+}
+
+func (x *ProfileSnapshot) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *ProfileSnapshot) GetCompletion() string {
+	if x != nil {
+		return x.Completion
+	}
+	return ""
+}
+
+func (x *ProfileSnapshot) GetProfileKind() string {
+	if x != nil {
+		return x.ProfileKind
+	}
+	return ""
+}
+
+func (x *ProfileSnapshot) GetSpec() []byte {
+	if x != nil {
+		return x.Spec
+	}
+	return nil
+}
+
+func (x *ProfileSnapshot) GetSpecSha256() []byte {
+	if x != nil {
+		return x.SpecSha256
+	}
+	return nil
+}
+
+func (x *ProfileSnapshot) GetEntryCount() uint32 {
+	if x != nil {
+		return x.EntryCount
+	}
+	return 0
+}
+
+func (x *ProfileSnapshot) GetLabels() map[string]string {
+	if x != nil {
+		return x.Labels
+	}
+	return nil
+}
+
+func (x *ProfileSnapshot) GetInstanceId() string {
+	if x != nil {
+		return x.InstanceId
+	}
+	return ""
+}
+
+func (x *ProfileSnapshot) GetWlid() string {
+	if x != nil {
+		return x.Wlid
+	}
+	return ""
+}
+
+type ProfileSnapshotBatch struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Snapshots        []*ProfileSnapshot     `protobuf:"bytes,1,rep,name=snapshots,proto3" json:"snapshots,omitempty"`
+	OldestSeq        uint64                 `protobuf:"varint,2,opt,name=oldest_seq,json=oldestSeq,proto3" json:"oldest_seq,omitempty"`
+	NewestSeq        uint64                 `protobuf:"varint,3,opt,name=newest_seq,json=newestSeq,proto3" json:"newest_seq,omitempty"`
+	Gap              bool                   `protobuf:"varint,4,opt,name=gap,proto3" json:"gap,omitempty"`
+	DroppedSinceLast uint64                 `protobuf:"varint,5,opt,name=dropped_since_last,json=droppedSinceLast,proto3" json:"dropped_since_last,omitempty"`
+	SentAtNs         int64                  `protobuf:"varint,6,opt,name=sent_at_ns,json=sentAtNs,proto3" json:"sent_at_ns,omitempty"`
+	ProducerEpoch    string                 `protobuf:"bytes,7,opt,name=producer_epoch,json=producerEpoch,proto3" json:"producer_epoch,omitempty"`
+	NodeAgentVersion string                 `protobuf:"bytes,8,opt,name=node_agent_version,json=nodeAgentVersion,proto3" json:"node_agent_version,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *ProfileSnapshotBatch) Reset() {
+	*x = ProfileSnapshotBatch{}
+	mi := &file_nodeagent_direct_v1_alertstream_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProfileSnapshotBatch) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProfileSnapshotBatch) ProtoMessage() {}
+
+func (x *ProfileSnapshotBatch) ProtoReflect() protoreflect.Message {
+	mi := &file_nodeagent_direct_v1_alertstream_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProfileSnapshotBatch.ProtoReflect.Descriptor instead.
+func (*ProfileSnapshotBatch) Descriptor() ([]byte, []int) {
+	return file_nodeagent_direct_v1_alertstream_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ProfileSnapshotBatch) GetSnapshots() []*ProfileSnapshot {
+	if x != nil {
+		return x.Snapshots
+	}
+	return nil
+}
+
+func (x *ProfileSnapshotBatch) GetOldestSeq() uint64 {
+	if x != nil {
+		return x.OldestSeq
+	}
+	return 0
+}
+
+func (x *ProfileSnapshotBatch) GetNewestSeq() uint64 {
+	if x != nil {
+		return x.NewestSeq
+	}
+	return 0
+}
+
+func (x *ProfileSnapshotBatch) GetGap() bool {
+	if x != nil {
+		return x.Gap
+	}
+	return false
+}
+
+func (x *ProfileSnapshotBatch) GetDroppedSinceLast() uint64 {
+	if x != nil {
+		return x.DroppedSinceLast
+	}
+	return 0
+}
+
+func (x *ProfileSnapshotBatch) GetSentAtNs() int64 {
+	if x != nil {
+		return x.SentAtNs
+	}
+	return 0
+}
+
+func (x *ProfileSnapshotBatch) GetProducerEpoch() string {
+	if x != nil {
+		return x.ProducerEpoch
+	}
+	return ""
+}
+
+func (x *ProfileSnapshotBatch) GetNodeAgentVersion() string {
+	if x != nil {
+		return x.NodeAgentVersion
+	}
+	return ""
+}
+
+type AckRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Hostname      string                 `protobuf:"bytes,1,opt,name=hostname,proto3" json:"hostname,omitempty"`
+	ProducerEpoch string                 `protobuf:"bytes,2,opt,name=producer_epoch,json=producerEpoch,proto3" json:"producer_epoch,omitempty"`
+	UptoSeq       uint64                 `protobuf:"varint,3,opt,name=upto_seq,json=uptoSeq,proto3" json:"upto_seq,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AckRequest) Reset() {
+	*x = AckRequest{}
+	mi := &file_nodeagent_direct_v1_alertstream_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AckRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AckRequest) ProtoMessage() {}
+
+func (x *AckRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_nodeagent_direct_v1_alertstream_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AckRequest.ProtoReflect.Descriptor instead.
+func (*AckRequest) Descriptor() ([]byte, []int) {
+	return file_nodeagent_direct_v1_alertstream_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *AckRequest) GetHostname() string {
+	if x != nil {
+		return x.Hostname
+	}
+	return ""
+}
+
+func (x *AckRequest) GetProducerEpoch() string {
+	if x != nil {
+		return x.ProducerEpoch
+	}
+	return ""
+}
+
+func (x *AckRequest) GetUptoSeq() uint64 {
+	if x != nil {
+		return x.UptoSeq
+	}
+	return 0
+}
+
+type AckResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AckedUptoSeq  uint64                 `protobuf:"varint,1,opt,name=acked_upto_seq,json=ackedUptoSeq,proto3" json:"acked_upto_seq,omitempty"`
+	ProducerEpoch string                 `protobuf:"bytes,2,opt,name=producer_epoch,json=producerEpoch,proto3" json:"producer_epoch,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AckResponse) Reset() {
+	*x = AckResponse{}
+	mi := &file_nodeagent_direct_v1_alertstream_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AckResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AckResponse) ProtoMessage() {}
+
+func (x *AckResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_nodeagent_direct_v1_alertstream_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AckResponse.ProtoReflect.Descriptor instead.
+func (*AckResponse) Descriptor() ([]byte, []int) {
+	return file_nodeagent_direct_v1_alertstream_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *AckResponse) GetAckedUptoSeq() uint64 {
+	if x != nil {
+		return x.AckedUptoSeq
+	}
+	return 0
+}
+
+func (x *AckResponse) GetProducerEpoch() string {
+	if x != nil {
+		return x.ProducerEpoch
+	}
+	return ""
+}
+
 var File_nodeagent_direct_v1_alertstream_proto protoreflect.FileDescriptor
 
 const file_nodeagent_direct_v1_alertstream_proto_rawDesc = "" +
@@ -339,9 +731,60 @@ const file_nodeagent_direct_v1_alertstream_proto_rawDesc = "" +
 	"\x0ecloud_metadata\x18\t \x01(\fR\rcloudMetadata\x12!\n" +
 	"\fmitre_tactic\x18\n" +
 	" \x01(\tR\vmitreTactic\x12'\n" +
-	"\x0fmitre_technique\x18\v \x01(\tR\x0emitreTechniqueJ\x04\b\f\x10\rR\frule_version2d\n" +
+	"\x0fmitre_technique\x18\v \x01(\tR\x0emitreTechniqueJ\x04\b\f\x10\rR\frule_version\"\xa3\x05\n" +
+	"\x0fProfileSnapshot\x12\x10\n" +
+	"\x03seq\x18\x01 \x01(\x04R\x03seq\x12\x1a\n" +
+	"\bhostname\x18\x02 \x01(\tR\bhostname\x12%\n" +
+	"\x0eproducer_epoch\x18\x03 \x01(\tR\rproducerEpoch\x12\x1c\n" +
+	"\tnamespace\x18\x04 \x01(\tR\tnamespace\x12!\n" +
+	"\fprofile_name\x18\x05 \x01(\tR\vprofileName\x12\x1d\n" +
+	"\n" +
+	"chunk_name\x18\x06 \x01(\tR\tchunkName\x12\x1b\n" +
+	"\tseries_id\x18\a \x01(\tR\bseriesId\x12$\n" +
+	"\x0ereport_time_ns\x18\b \x01(\x03R\freportTimeNs\x12-\n" +
+	"\x13prev_report_time_ns\x18\t \x01(\x03R\x10prevReportTimeNs\x12\x16\n" +
+	"\x06status\x18\n" +
+	" \x01(\tR\x06status\x12\x1e\n" +
+	"\n" +
+	"completion\x18\v \x01(\tR\n" +
+	"completion\x12!\n" +
+	"\fprofile_kind\x18\f \x01(\tR\vprofileKind\x12\x12\n" +
+	"\x04spec\x18\r \x01(\fR\x04spec\x12\x1f\n" +
+	"\vspec_sha256\x18\x0e \x01(\fR\n" +
+	"specSha256\x12\x1f\n" +
+	"\ventry_count\x18\x0f \x01(\rR\n" +
+	"entryCount\x12H\n" +
+	"\x06labels\x18\x10 \x03(\v20.nodeagent.direct.v1.ProfileSnapshot.LabelsEntryR\x06labels\x12\x1f\n" +
+	"\vinstance_id\x18\x11 \x01(\tR\n" +
+	"instanceId\x12\x12\n" +
+	"\x04wlid\x18\x12 \x01(\tR\x04wlid\x1a9\n" +
+	"\vLabelsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xcb\x02\n" +
+	"\x14ProfileSnapshotBatch\x12B\n" +
+	"\tsnapshots\x18\x01 \x03(\v2$.nodeagent.direct.v1.ProfileSnapshotR\tsnapshots\x12\x1d\n" +
+	"\n" +
+	"oldest_seq\x18\x02 \x01(\x04R\toldestSeq\x12\x1d\n" +
+	"\n" +
+	"newest_seq\x18\x03 \x01(\x04R\tnewestSeq\x12\x10\n" +
+	"\x03gap\x18\x04 \x01(\bR\x03gap\x12,\n" +
+	"\x12dropped_since_last\x18\x05 \x01(\x04R\x10droppedSinceLast\x12\x1c\n" +
+	"\n" +
+	"sent_at_ns\x18\x06 \x01(\x03R\bsentAtNs\x12%\n" +
+	"\x0eproducer_epoch\x18\a \x01(\tR\rproducerEpoch\x12,\n" +
+	"\x12node_agent_version\x18\b \x01(\tR\x10nodeAgentVersion\"j\n" +
+	"\n" +
+	"AckRequest\x12\x1a\n" +
+	"\bhostname\x18\x01 \x01(\tR\bhostname\x12%\n" +
+	"\x0eproducer_epoch\x18\x02 \x01(\tR\rproducerEpoch\x12\x19\n" +
+	"\bupto_seq\x18\x03 \x01(\x04R\auptoSeq\"Z\n" +
+	"\vAckResponse\x12$\n" +
+	"\x0eacked_upto_seq\x18\x01 \x01(\x04R\fackedUptoSeq\x12%\n" +
+	"\x0eproducer_epoch\x18\x02 \x01(\tR\rproducerEpoch2\xa0\x02\n" +
 	"\vAlertStream\x12U\n" +
-	"\tSubscribe\x12%.nodeagent.direct.v1.SubscribeRequest\x1a\x1f.nodeagent.direct.v1.AlertBatch0\x01BMZKgithub.com/k8sstormcenter/nodeagent-direct-api/nodeagent/direct/v1;directv1b\x06proto3"
+	"\tSubscribe\x12%.nodeagent.direct.v1.SubscribeRequest\x1a\x1f.nodeagent.direct.v1.AlertBatch0\x01\x12g\n" +
+	"\x11SubscribeProfiles\x12%.nodeagent.direct.v1.SubscribeRequest\x1a).nodeagent.direct.v1.ProfileSnapshotBatch0\x01\x12Q\n" +
+	"\fAckSnapshots\x12\x1f.nodeagent.direct.v1.AckRequest\x1a .nodeagent.direct.v1.AckResponseBMZKgithub.com/k8sstormcenter/nodeagent-direct-api/nodeagent/direct/v1;directv1b\x06proto3"
 
 var (
 	file_nodeagent_direct_v1_alertstream_proto_rawDescOnce sync.Once
@@ -355,21 +798,32 @@ func file_nodeagent_direct_v1_alertstream_proto_rawDescGZIP() []byte {
 	return file_nodeagent_direct_v1_alertstream_proto_rawDescData
 }
 
-var file_nodeagent_direct_v1_alertstream_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_nodeagent_direct_v1_alertstream_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_nodeagent_direct_v1_alertstream_proto_goTypes = []any{
-	(*SubscribeRequest)(nil), // 0: nodeagent.direct.v1.SubscribeRequest
-	(*AlertBatch)(nil),       // 1: nodeagent.direct.v1.AlertBatch
-	(*Alert)(nil),            // 2: nodeagent.direct.v1.Alert
+	(*SubscribeRequest)(nil),     // 0: nodeagent.direct.v1.SubscribeRequest
+	(*AlertBatch)(nil),           // 1: nodeagent.direct.v1.AlertBatch
+	(*Alert)(nil),                // 2: nodeagent.direct.v1.Alert
+	(*ProfileSnapshot)(nil),      // 3: nodeagent.direct.v1.ProfileSnapshot
+	(*ProfileSnapshotBatch)(nil), // 4: nodeagent.direct.v1.ProfileSnapshotBatch
+	(*AckRequest)(nil),           // 5: nodeagent.direct.v1.AckRequest
+	(*AckResponse)(nil),          // 6: nodeagent.direct.v1.AckResponse
+	nil,                          // 7: nodeagent.direct.v1.ProfileSnapshot.LabelsEntry
 }
 var file_nodeagent_direct_v1_alertstream_proto_depIdxs = []int32{
 	2, // 0: nodeagent.direct.v1.AlertBatch.alerts:type_name -> nodeagent.direct.v1.Alert
-	0, // 1: nodeagent.direct.v1.AlertStream.Subscribe:input_type -> nodeagent.direct.v1.SubscribeRequest
-	1, // 2: nodeagent.direct.v1.AlertStream.Subscribe:output_type -> nodeagent.direct.v1.AlertBatch
-	2, // [2:3] is the sub-list for method output_type
-	1, // [1:2] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	7, // 1: nodeagent.direct.v1.ProfileSnapshot.labels:type_name -> nodeagent.direct.v1.ProfileSnapshot.LabelsEntry
+	3, // 2: nodeagent.direct.v1.ProfileSnapshotBatch.snapshots:type_name -> nodeagent.direct.v1.ProfileSnapshot
+	0, // 3: nodeagent.direct.v1.AlertStream.Subscribe:input_type -> nodeagent.direct.v1.SubscribeRequest
+	0, // 4: nodeagent.direct.v1.AlertStream.SubscribeProfiles:input_type -> nodeagent.direct.v1.SubscribeRequest
+	5, // 5: nodeagent.direct.v1.AlertStream.AckSnapshots:input_type -> nodeagent.direct.v1.AckRequest
+	1, // 6: nodeagent.direct.v1.AlertStream.Subscribe:output_type -> nodeagent.direct.v1.AlertBatch
+	4, // 7: nodeagent.direct.v1.AlertStream.SubscribeProfiles:output_type -> nodeagent.direct.v1.ProfileSnapshotBatch
+	6, // 8: nodeagent.direct.v1.AlertStream.AckSnapshots:output_type -> nodeagent.direct.v1.AckResponse
+	6, // [6:9] is the sub-list for method output_type
+	3, // [3:6] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_nodeagent_direct_v1_alertstream_proto_init() }
@@ -383,7 +837,7 @@ func file_nodeagent_direct_v1_alertstream_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_nodeagent_direct_v1_alertstream_proto_rawDesc), len(file_nodeagent_direct_v1_alertstream_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
